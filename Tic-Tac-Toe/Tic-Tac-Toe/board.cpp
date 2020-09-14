@@ -41,25 +41,24 @@ void Board::print_board() {
 	cout << string(2, '\n');
 }
 
-
 bool Board::submit_move(string move, string player, char marker) {
 	// checks to see if input is size 3 and contains a space in the middle
 	if (move.size() != 3 ) {
-		cout << "Invalid Input " << player << ": Please enter the row and column of your move (Example: 1 1)." << endl;
+		cout << "Invalid Input " << player << ": Please enter a column then a row (Example: 1 1)." << endl;
 		return false;
 	} 
 	else if (move[1] != ' '){
-		cout << "Invalid Input " << player << ": Please enter the row and column of your move (Example: 1 1)." << endl;
+		cout << "Invalid Input " << player << ": Please enter a column then a row (Example: 1 1)." << endl;
 		return false;
 	}
 	else if (move == "   ") {
-		cout << "Invalid Input " << player << ": Please enter the row and column of your move (Example: 1 1)." << endl;
+		cout << "Invalid Input " << player << ": Please enter a column then a row (Example: 1 1)." << endl;
 		return false;
 	}
 
 	// convert char input into string
-	int row_move = (int)move[0] - 48 - 1;
-	int column_move = (int)move[2] - 48 - 1;
+	int column_move = (int)move[0] - 48 - 1;
+	int row_move = (int)move[2] - 48 - 1;
 
 	// check to see if current sqaure is taken
 	if (this->board[row_move][column_move] == 'X' || this->board[row_move][column_move] == 'O') {
@@ -125,7 +124,7 @@ bool Board::is_winner(string player, char marker) {
 bool Board::is_tie() {
 	// is the board filled up with Xs and Os?
 	if (this->board[0][0] != ' ' && this->board[0][1] != ' ' && this->board[0][2] != ' ' 
-		&& this->board[1][0] != ' ' && this->board[1][1] != ' ' && this->board[1][2] != ' '
+		&& this->board[1][0] != ' ' && this->board[1][1] != ' '&& this->board[1][2] != ' '
 		&& this->board[2][0] != ' ' && this->board[2][1] != ' ' && this->board[2][2] != ' ') {
 		cout << "The game has been tied!";
 		return true;
