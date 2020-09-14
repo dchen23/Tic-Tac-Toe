@@ -15,7 +15,7 @@
 </p>
 
 ## Description
-Simple player verse player Tic-Tac-Toe game implemented in C++.
+Simple player verse player Tic-Tac-Toe game implemented in C++.  
 Created with object oreinted programming in mind.
 
 ## Requirements
@@ -23,7 +23,7 @@ Created with object oreinted programming in mind.
 
 ## Contributions
 Contributions are always welcome!  
-Just make a [pull request](../../pulls
+Just make a [pull request](../../pulls).
 
 ## Contributions
 Contributions are always welcome!
