@@ -12,14 +12,11 @@ using std::getline;
 // globals
 int count = 1;
 
-// 	cout << player << "'s (" << marker << ")" << " turn to move.";
-
 Player::Player(char marker) {
 	cout << "Enter player " << count << "'s name: ";
-	cin >> name;
-	cin.ignore();
+	getline(cin, this->name);
 
-	cout << name << "'s marker is " << marker << endl;
+	cout << this->name << "'s marker is " << marker << endl;
 	this->marker = marker;
 
 	++count;
@@ -35,10 +32,7 @@ char Player::get_marker() {
 
 string Player::get_player_move() {
 	cout << "Enter a move (" << this->marker << ") " << this->name << ": ";
-	// 1 1
-	// make check legit input
-	// " 2"
-	std::getline(cin, this->move);
+	getline(cin, this->move);
 	
 	return this->move;
 }

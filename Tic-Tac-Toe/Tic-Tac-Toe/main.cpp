@@ -20,7 +20,7 @@ int main() {
 	// game loop
 	while (true) {
 		// player 1's turn
-		if (board.is_winner(player1.get_name(), player1.get_marker()) || board.is_winner(player2.get_name(), player2.get_marker())) {
+		if (board.is_winner(player2.get_name(), player2.get_marker())) {
 			return 0;
 		}
 		if (board.is_tie()) {
@@ -32,13 +32,12 @@ int main() {
 		board.print_board();
 
 		// player 2's turn
-		if (board.is_winner(player1.get_name(), player1.get_marker()) || board.is_winner(player2.get_name(), player2.get_marker())) {
+		if (board.is_winner(player1.get_name(), player1.get_marker())) {
 			return 0;
 		}
 		if (board.is_tie()) {
 			return 0;
 		}
-
 		while (!(board.submit_move(player2.get_player_move(), player2.get_name(), player2.get_marker()))) {
 			continue;
 		}

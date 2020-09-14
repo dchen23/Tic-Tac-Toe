@@ -66,7 +66,7 @@ bool Board::submit_move(string move, string player, char marker) {
 	}
 
 	// check to see if integers are in bound
-	if (row_move > 2 || row_move < 0 || column_move > 2 || row_move < 0) {
+	if (row_move > 2  || column_move > 2) {
 		cout << "Selected region out of bounds." << endl;
 		return false;
 	}
