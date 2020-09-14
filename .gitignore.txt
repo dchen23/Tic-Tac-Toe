@@ -1,0 +1,8 @@
+# ignore Visual Studio Code files
+Debug/
+.vs/
+v16/
+*.sln
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
