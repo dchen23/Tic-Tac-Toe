@@ -84,7 +84,8 @@ bool Board::submit_move(string move, string player, char marker) {
 
 	return true;
 }
-
+	
+// check to see if player has 1 out of the 8 winning positions
 bool Board::is_winner(string player, char marker) {
 	if (this->board[0][0] == marker && this->board[0][1] == marker && this->board[0][2] == marker) {
 		cout << "Well done " << player << " you have won.";
