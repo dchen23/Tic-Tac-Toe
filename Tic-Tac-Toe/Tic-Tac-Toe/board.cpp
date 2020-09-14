@@ -1,18 +1,24 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cctype>
 
 #include "board.h"
+#include "player.h"
 
 using std::cout;
 using std::endl;
 using std::cin;
 using std::setw;
 using std::string;
-using std::stoi;
+using std::atoi;
+using std::isdigit;
 
-Board::Board(): 
-	board{{ ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }} {
+#define X 'X'
+#define O 'O'
+
+Board::Board() :
+	board{ { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' } } {
 }
 
 char** Board::get_game_board() {
@@ -23,11 +29,8 @@ void Board::print_board() {
 	cout << endl;
 	for (size_t row = 0; row < 3; ++row) {
 		cout << setw(3);
-
 		for (size_t column = 0; column < 3; ++column) {
-
 			cout << "(" << this->board[row][column] << ")";
-
 			if (column == 0 || column == 1) {
 				cout << setw(3) << "|" << setw(3);
 			}
@@ -41,81 +44,69 @@ void Board::print_board() {
 	cout << string(2, '\n');
 }
 
-bool Board::submit_move(string move, string player, char marker) {
-	// checks to see if input is size 3 and contains a space in the middle
-	if (move.size() != 3 ) {
-		cout << "Invalid Input " << player << ": Please enter a column then a row (Example: 1 1)." << endl;
-		return false;
-	} 
-	else if (move[1] != ' '){
-		cout << "Invalid Input " << player << ": Please enter a column then a row (Example: 1 1)." << endl;
+bool Board::submit_move(string move, Player player) {
+	// checks to see if input is size 3 and contains a space in the middle 1 1
+	if (move.size() != 3 || move[1] != ' ' || !(isdigit(move[0])) || !(isdigit(move[2]))) {
+		cout << "Invalid Input " << player.get_name() << ": Please enter a column then a row (Example: 1 1)." << endl;
 		return false;
 	}
-	else if (move == "   ") {
-		cout << "Invalid Input " << player << ": Please enter a column then a row (Example: 1 1)." << endl;
-		return false;
-	}
+
 
 	// convert char input into string
 	int column_move = (int)move[0] - 48 - 1;
 	int row_move = (int)move[2] - 48 - 1;
 
 	// check to see if current sqaure is taken
-	if (this->board[row_move][column_move] == 'X' || this->board[row_move][column_move] == 'O') {
-		cout << "This square is taken " << player << "." << endl;
+	if (this->board[row_move][column_move] == X || this->board[row_move][column_move] == O) {
+		cout << "This square is taken " << player.get_name() << "." << endl;
 		return false;
 	}
 
 	// check to see if integers are in bound
-	if (row_move > 2  || column_move > 2) {
+	if (row_move > 2 || column_move > 2) {
 		cout << "Selected region out of bounds." << endl;
 		return false;
 	}
-	
-	// player 1's turn
-	if (marker == 'X') {
-		this->board[row_move][column_move] = 'X';
-	}
-	// player 2's turn
-	if (marker == 'O') {
-		this->board[row_move][column_move] = 'O';
-	}
+
+
+	this->board[row_move][column_move] = player.get_marker();
+
 
 	return true;
 }
-	
+
 // check to see if player has 1 out of the 8 winning positions
-bool Board::is_winner(string player, char marker) {
-	if (this->board[0][0] == marker && this->board[0][1] == marker && this->board[0][2] == marker) {
-		cout << "Well done " << player << " you have won.";
+bool Board::is_winner(Player player) {
+	if (this->board[0][0] == player.get_marker() && this->board[0][1] == player.get_marker() && this->board[0][2] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
-	if (this->board[1][0] == marker && this->board[1][1] == marker && this->board[1][2] == marker) {
-		cout << "Well done " << player << " you have won.";
+	if (this->board[1][0] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[1][2] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
-	if (this->board[2][0] == marker && this->board[2][1] == marker && this->board[2][2] == marker) {
-		cout << "Well done " << player << " you have won.";
+	if (this->board[2][0] == player.get_marker() && this->board[2][1] == player.get_marker() && this->board[2][2] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
-	if (this->board[0][0] == marker && this->board[1][0] == marker && this->board[2][0] == marker) {
-		cout << "Well done " << player << " you have won.";
+	if (this->board[0][0] == player.get_marker() && this->board[1][0] == player.get_marker() && this->board[2][0] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
-	if (this->board[0][1] == marker && this->board[1][1] == marker && this->board[2][1] == marker) {
-		cout << "Well done " << player << " you have won.";
+	if (this->board[0][1] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[2][1] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
-	if (this->board[0][2] == marker && this->board[1][2] == marker && this->board[2][2] == marker) {
-		cout << "Well done " << player << " you have won.";
+	if (this->board[0][2] == player.get_marker() && this->board[1][2] == player.get_marker() && this->board[2][2] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
-	if (this->board[0][0] == marker && this->board[1][1] == marker && this->board[2][2] == marker) {
-		cout << "Well done " << player << " you have won.";
+	if (this->board[0][0] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[2][2] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
-	if (this->board[2][0] == marker && this->board[1][1] == marker && this->board[0][2] == marker) {
-		cout << "Well done " << player << " you have won.";
+	if (this->board[2][0] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[0][2] == player.get_marker()) {
+		cout << "Well done " << player.get_name() << " you have won.";
 		return true;
 	}
 	return false;
@@ -123,8 +114,8 @@ bool Board::is_winner(string player, char marker) {
 
 bool Board::is_tie() {
 	// is the board filled up with Xs and Os?
-	if (this->board[0][0] != ' ' && this->board[0][1] != ' ' && this->board[0][2] != ' ' 
-		&& this->board[1][0] != ' ' && this->board[1][1] != ' '&& this->board[1][2] != ' '
+	if (this->board[0][0] != ' ' && this->board[0][1] != ' ' && this->board[0][2] != ' '
+		&& this->board[1][0] != ' ' && this->board[1][1] != ' ' && this->board[1][2] != ' '
 		&& this->board[2][0] != ' ' && this->board[2][1] != ' ' && this->board[2][2] != ' ') {
 		cout << "The game has been tied!";
 		return true;

@@ -10,7 +10,7 @@ using std::string;
 using std::getline;
 
 // globals
-int count = 1;
+static int count = 1;
 
 Player::Player(char marker) {
 	cout << "Enter player " << count << "'s name: ";
