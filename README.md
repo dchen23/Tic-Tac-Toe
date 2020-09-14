@@ -14,7 +14,7 @@
 
 ## Description
 Simple player verse player Tic-Tac-Toe game implemented in C++.  
-Created with object oreinted programming in mind.
+Created with object oriented programming in mind.
 
 ## Requirements
 * C++ 11
