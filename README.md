@@ -8,7 +8,6 @@
 <br />
 
 <p align="center">
-  
 <a href="../../issues"><img src="https://img.shields.io/github/issues/aminbeigi/Github-README-Template.svg?style=flat-square" /></a>
 <a href="../../pulls"><img src="https://img.shields.io/github/issues-pr/aminbeigi/Github-README-Template.svg?style=flat-square" /></a> 
 </p>
