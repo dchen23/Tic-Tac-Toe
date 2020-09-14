@@ -63,7 +63,7 @@ bool Board::submit_move(string move, string player, char marker) {
 
 	// check to see if current sqaure is taken
 	if (this->board[row_move][column_move] == 'X' || this->board[row_move][column_move] == 'O') {
-		cout << "This block is taken choose another block " << player << "." << endl;
+		cout << "This square is taken " << player << "." << endl;
 		return false;
 	}
 
@@ -73,9 +73,11 @@ bool Board::submit_move(string move, string player, char marker) {
 		return false;
 	}
 	
+	// player 1's turn
 	if (marker == 'X') {
 		this->board[row_move][column_move] = 'X';
 	}
+	// player 2's turn
 	if (marker == 'O') {
 		this->board[row_move][column_move] = 'O';
 	}
@@ -120,6 +122,7 @@ bool Board::is_winner(string player, char marker) {
 }
 
 bool Board::is_tie() {
+	// is the board filled up with Xs and Os?
 	if (this->board[0][0] != ' ' && this->board[0][1] != ' ' && this->board[0][2] != ' ' 
 		&& this->board[1][0] != ' ' && this->board[1][1] != ' '&& this->board[1][2] != ' '
 		&& this->board[2][0] != ' '&& this->board[2][1] != ' '&& this->board[2][2] != ' ') {
