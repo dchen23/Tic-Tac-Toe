@@ -23,9 +23,5 @@ Created with object oriented programming in mind.
 Contributions are always welcome!  
 Just make a [pull request](../../pulls).
 
-## Contributions
-Contributions are always welcome!  
-Just make a [pull request](../../pulls).
-
 ## Licence
 MIT licence.
