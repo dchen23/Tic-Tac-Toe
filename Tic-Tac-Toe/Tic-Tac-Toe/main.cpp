@@ -20,28 +20,30 @@ int main() {
 
 	board.print_board();
 
-	//board.submit_move("2 2", player1.get_name(), player1.get_marker());
-
-	//board.is_move_valid("1 2");
-
-	//board.print_board();
 
 	// game loop
 	while (true) {
-		// winner
+		// player 1's turn
 		if (board.is_winner(player1.get_name(), player1.get_marker()) || board.is_winner(player2.get_name(), player2.get_marker())) {
 			return 0;
 		}
-
-		// tie
 		if (board.is_tie()) {
 			return 0;
 		}
-
-		board.submit_move(player1.get_player_move(), player1.get_name(), player1.get_marker());
-
+		while (!(board.submit_move(player1.get_player_move(), player1.get_name(), player1.get_marker()))) {
+			continue;
+		}
 		board.print_board();
 
+		// player 2's turn
+		if (board.is_winner(player1.get_name(), player1.get_marker()) || board.is_winner(player2.get_name(), player2.get_marker())) {
+			return 0;
+		}
+		if (board.is_tie()) {
+			return 0;
+		}
+		board.submit_move(player2.get_player_move(), player2.get_name(), player2.get_marker());
+		board.print_board();
 	}
 
 	return 0;
