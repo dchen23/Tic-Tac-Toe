@@ -24,7 +24,7 @@ Contributions are always welcome!
 Just make a [pull request](../../pulls).
 
 ## Contributions
-Contributions are always welcome!
+Contributions are always welcome!  
 Just make a [pull request](../../pulls).
 
 ## Licence
