@@ -37,6 +37,8 @@ void Board::print_board() {
 		}
 	}
 	cout << endl;
+	// clear screen
+	cout << string(2, '\n');
 }
 
 

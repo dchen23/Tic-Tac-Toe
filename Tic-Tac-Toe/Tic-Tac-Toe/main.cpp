@@ -9,12 +9,12 @@ using std::endl;
 using std::string;
 
 int main() {
-	string padding = string(12, '*');
+	string padding = string(11, '*');
 	cout << padding << endl << "Tic-Tac-Toe" << endl << padding << endl;
 	Player player1('X');
 	Player player2('O');
-
 	Board board;
+
 	board.print_board();
 
 	// game loop
