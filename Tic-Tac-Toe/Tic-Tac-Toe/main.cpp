@@ -6,20 +6,16 @@
 
 using std::cout;
 using std::endl;
-using std::cin;
 using std::string;
 
 int main() {
 	string padding = string(12, '*');
 	cout << padding << endl << "Tic-Tac-Toe" << endl << padding << endl;
-	cout << "Valid moves are {row} {column} i.e. 1 1 being the centre block." << endl;
-
 	Player player1('X');
 	Player player2('O');
+
 	Board board;
-
 	board.print_board();
-
 
 	// game loop
 	while (true) {
@@ -42,7 +38,10 @@ int main() {
 		if (board.is_tie()) {
 			return 0;
 		}
-		board.submit_move(player2.get_player_move(), player2.get_name(), player2.get_marker());
+
+		while (!(board.submit_move(player2.get_player_move(), player2.get_name(), player2.get_marker()))) {
+			continue;
+		}
 		board.print_board();
 	}
 

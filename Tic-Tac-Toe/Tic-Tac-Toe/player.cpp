@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <ios>
 
 #include "player.h"
 
@@ -27,15 +26,15 @@ Player::Player(char marker) {
 }
 
 string Player::get_name() {
-	return name;
+	return this->name;
 }
 
 char Player::get_marker() {
-	return marker;
+	return this->marker;
 }	
 
 string Player::get_player_move() {
-	cout << "Enter a move: ";
+	cout << "Enter a move (" << this->marker << ") " << this->name << ": ";
 	// 1 1
 	// make check legit input
 	// " 2"

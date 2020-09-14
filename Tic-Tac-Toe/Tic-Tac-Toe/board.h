@@ -9,7 +9,6 @@ public:
 	bool submit_move(std::string, std::string, char);
 	bool is_winner(std::string, char);
 	bool is_tie();
-	bool is_move_valid(std::string);
 
 private:
 	char board[3][3];

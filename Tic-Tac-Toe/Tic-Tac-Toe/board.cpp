@@ -41,19 +41,39 @@ void Board::print_board() {
 
 
 bool Board::submit_move(string move, string player, char marker) {
-	// move = row column (i.e. 1 2)
+	// checks to see if input is size 3 and contains a space in the middle
+	if (move.size() != 3 ) {
+		cout << "Invalid Input " << player << ": Please enter the row and column of your move (Example: 1 1)." << endl;
+		return false;
+	} 
+	else if (move[1] != ' '){
+		cout << "Invalid Input " << player << ": Please enter the row and column of your move (Example: 1 1)." << endl;
+		return false;
+	}
+	else if (move == "   ") {
+		cout << "Invalid Input " << player << ": Please enter the row and column of your move (Example: 1 1)." << endl;
+		return false;
+	}
+
+	// convert char input into string
 	int row_move = (int)move[0] - 48 - 1;
 	int column_move = (int)move[2] - 48 - 1;
 
-		if (this->board[row_move][column_move] == 'X' || this->board[row_move][column_move] == 'O') {
+	// check to see if current sqaure is taken
+	if (this->board[row_move][column_move] == 'X' || this->board[row_move][column_move] == 'O') {
 		cout << "This block is taken choose another block " << player << "." << endl;
+		return false;
+	}
+
+	// check to see if integers are in bound
+	if (row_move > 2 || row_move < 0 || column_move > 2 || row_move < 0) {
+		cout << "Selected region out of bounds." << endl;
 		return false;
 	}
 	
 	if (marker == 'X') {
 		this->board[row_move][column_move] = 'X';
 	}
-
 	if (marker == 'O') {
 		this->board[row_move][column_move] = 'O';
 	}
@@ -105,16 +125,4 @@ bool Board::is_tie() {
 		return true;
 	}
 	return false;
-}
-
-bool Board::is_move_valid(string move) {
-	int row_move = (int)move[0] - 48 - 1;
-	int column_move = (int)move[2] - 48 - 1;
-
-	if (row_move > 2 || row_move < 0 || column_move > 2 || row_move < 0) {
-		cout << "Selected region out of bounds.";
-		return false;
-	}
-
-	return true;
 }
