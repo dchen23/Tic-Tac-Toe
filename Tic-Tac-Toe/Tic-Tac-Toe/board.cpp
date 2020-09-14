@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <string>
 #include <cctype>
+#include <cstdlib>
 
 #include "board.h"
 #include "player.h"
@@ -16,6 +17,7 @@ using std::isdigit;
 
 #define X 'X'
 #define O 'O'
+#define TO_ASCII 48 - 1
 
 Board::Board() :
 	board{ { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' } } {
@@ -51,16 +53,9 @@ bool Board::submit_move(string move, Player player) {
 		return false;
 	}
 
-
 	// convert char input into string
-	int column_move = (int)move[0] - 48 - 1;
-	int row_move = (int)move[2] - 48 - 1;
-
-	// check to see if current sqaure is taken
-	if (this->board[row_move][column_move] == X || this->board[row_move][column_move] == O) {
-		cout << "This square is taken " << player.get_name() << "." << endl;
-		return false;
-	}
+	unsigned int column_move = (int)move[0] - TO_ASCII;
+	unsigned int row_move = (int)move[2] - TO_ASCII;
 
 	// check to see if integers are in bound
 	if (row_move > 2 || column_move > 2) {
@@ -68,9 +63,13 @@ bool Board::submit_move(string move, Player player) {
 		return false;
 	}
 
+	// check to see if current sqaure is taken
+	if (this->board[row_move][column_move] == X || this->board[row_move][column_move] == O) {
+		cout << "This square is taken " << player.get_name() << "." << endl;
+		return false;
+	}
 
 	this->board[row_move][column_move] = player.get_marker();
-
 
 	return true;
 }

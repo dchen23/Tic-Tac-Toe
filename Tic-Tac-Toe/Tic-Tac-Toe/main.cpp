@@ -8,10 +8,12 @@ using std::cout;
 using std::endl;
 using std::string;
 
+#define TITLE "Tic-Tac-Toe"
+
 int main() {
 	// display title
 	string padding = string(11, '*');
-	cout << padding << endl << "Tic-Tac-Toe" << endl << padding << endl;
+	cout << padding << endl << TITLE << endl << padding << endl;
 
 	// initialise objects
 	Player player1('X');
@@ -41,7 +43,6 @@ int main() {
 		while (!(board.submit_move(player2.get_player_move(), player2))) {
 			continue;
 		}
-		
 	}
 
 	return 0;
