@@ -12,12 +12,13 @@ using std::endl;
 using std::cin;
 using std::setw;
 using std::string;
-using std::atoi;
+using std::stoi;
 using std::isdigit;
+using std::to_string;
 
 #define X 'X'
 #define O 'O'
-#define CHAR_TO_INT 48 - 1
+#define TO_INDEX - 1
 
 Board::Board() :
 	board{ { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' } } {
@@ -55,8 +56,8 @@ bool Board::submit_move(Player player) {
 	}
 
 	// convert char input into string
-	unsigned int column_move = (int)player.get_player_move()[0] - CHAR_TO_INT;
-	unsigned int row_move = (int)player.get_player_move()[2] - CHAR_TO_INT;
+	unsigned int column_move = stoi(string(1, player.get_player_move()[0])) - TO_INDEX;
+	unsigned int row_move = stoi(string(1, player.get_player_move()[2])) - TO_INDEX;
 
 	// check to see if integers are in bound
 	if (row_move > 2 || column_move > 2) {
