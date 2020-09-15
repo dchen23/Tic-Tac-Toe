@@ -17,7 +17,7 @@ using std::isdigit;
 
 #define X 'X'
 #define O 'O'
-#define TO_ASCII 48 - 1
+#define CHAR_TO_INT 48 - 1
 
 Board::Board() :
 	board{ { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' } } {
@@ -54,8 +54,8 @@ bool Board::submit_move(string move, Player player) {
 	}
 
 	// convert char input into string
-	unsigned int column_move = (int)move[0] - TO_ASCII;
-	unsigned int row_move = (int)move[2] - TO_ASCII;
+	unsigned int column_move = (int)move[0] - CHAR_TO_INT;
+	unsigned int row_move = (int)move[2] - CHAR_TO_INT;
 
 	// check to see if integers are in bound
 	if (row_move > 2 || column_move > 2) {

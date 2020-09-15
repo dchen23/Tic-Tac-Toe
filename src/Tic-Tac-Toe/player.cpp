@@ -35,5 +35,5 @@ string Player::get_player_move() {
 	cout << "Enter a move (" << this->marker << ") " << this->name << ": ";
 	getline(cin, this->move);
 	
-	return this->move;
+ 	return this->move;
 }
