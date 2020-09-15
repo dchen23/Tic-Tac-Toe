@@ -14,6 +14,7 @@ public:
 
 private:
 	char board[3][3];
+	unsigned int empty_tiles;
 };
 
 #endif

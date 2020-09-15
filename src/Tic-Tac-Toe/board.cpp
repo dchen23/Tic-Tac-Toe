@@ -21,6 +21,7 @@ using std::isdigit;
 
 Board::Board() :
 	board{ { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' } } {
+	this->empty_tiles = 9;
 }
 
 char** Board::get_game_board() {
@@ -71,6 +72,9 @@ bool Board::submit_move(string move, Player player) {
 
 	this->board[row_move][column_move] = player.get_marker();
 
+	// keep track of empty tiles for Board::is_tie() function
+	--(this->empty_tiles);
+
 	return true;
 }
 
@@ -112,12 +116,11 @@ bool Board::is_winner(Player player) {
 }
 
 bool Board::is_tie() {
-	// is the board filled up with Xs and Os?
-	if (this->board[0][0] != ' ' && this->board[0][1] != ' ' && this->board[0][2] != ' '
-		&& this->board[1][0] != ' ' && this->board[1][1] != ' ' && this->board[1][2] != ' '
-		&& this->board[2][0] != ' ' && this->board[2][1] != ' ' && this->board[2][2] != ' ') {
+	// if there are no empty tiles then it is a tie
+	if (this->empty_tiles == 0) {
 		cout << "The game has been tied!";
 		return true;
 	}
+
 	return false;
 }
