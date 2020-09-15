@@ -24,10 +24,6 @@ Board::Board() :
 	this->empty_tiles = 9;
 }
 
-char** Board::get_game_board() {
-	return (char**)this->board;
-}
-
 void Board::print_board() {
 	cout << endl;
 	for (size_t row = 0; row < 3; ++row) {
@@ -47,16 +43,17 @@ void Board::print_board() {
 	cout << string(2, '\n');
 }
 
-bool Board::submit_move(string move, Player player) {
+bool Board::submit_move(Player player) {
+	player.set_player_move();
 	// checks to see if input is size 3 and contains a space in the middle 1 1
-	if (move.size() != 3 || move[1] != ' ' || !(isdigit(move[0])) || !(isdigit(move[2]))) {
+	if (player.get_player_move().size() != 3 || player.get_player_move()[1] != ' ' || !(isdigit(player.get_player_move()[0])) || !(isdigit(player.get_player_move()[2]))) {
 		cout << "Invalid Input " << player.get_name() << ": Please enter a column then a row (Example: 1 1)." << endl;
 		return false;
 	}
 
 	// convert char input into string
-	unsigned int column_move = (int)move[0] - CHAR_TO_INT;
-	unsigned int row_move = (int)move[2] - CHAR_TO_INT;
+	unsigned int column_move = (int)player.get_player_move()[0] - CHAR_TO_INT;
+	unsigned int row_move = (int)player.get_player_move()[2] - CHAR_TO_INT;
 
 	// check to see if integers are in bound
 	if (row_move > 2 || column_move > 2) {
@@ -80,6 +77,8 @@ bool Board::submit_move(string move, Player player) {
 
 // check to see if player has 1 out of the 8 winning positions
 bool Board::is_winner(Player player) {
+	
+
 	if (this->board[0][0] == player.get_marker() && this->board[0][1] == player.get_marker() && this->board[0][2] == player.get_marker()) {
 		cout << "Well done " << player.get_name() << " you have won.";
 		return true;

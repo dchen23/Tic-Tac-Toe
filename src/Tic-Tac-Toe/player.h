@@ -8,6 +8,7 @@ public:
 	Player(char);
 	std::string get_name();
 	char get_marker();
+	void set_player_move();
 	std::string get_player_move();
 
 private:

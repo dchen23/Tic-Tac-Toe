@@ -29,7 +29,7 @@ int main() {
 			return 0;
 		}
 		// check to see if player 1's move is legit then write it to the board
-		while (!(board.submit_move(player1.get_player_move(), player1))) {
+		while (!(board.submit_move(player1))) {
 			continue;
 		}
 		board.print_board();
@@ -40,7 +40,7 @@ int main() {
 			return 0;
 		}
 		// check to see if player 2's move is legit then write it to the board
-		while (!(board.submit_move(player2.get_player_move(), player2))) {
+		while (!(board.submit_move(player2))) {
 			continue;
 		}
 	}

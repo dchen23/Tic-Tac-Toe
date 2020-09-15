@@ -6,9 +6,8 @@
 class Board {
 public:
 	Board();
-	char** get_game_board();
 	void print_board();
-	bool submit_move(std::string move, Player player);
+	bool submit_move(Player player);
 	bool is_winner(Player player);
 	bool is_tie();
 

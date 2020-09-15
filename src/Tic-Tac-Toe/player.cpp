@@ -30,10 +30,11 @@ char Player::get_marker() {
 	return this->marker;
 }	
 
-// get input store it in a string then return the string
-string Player::get_player_move() {
+void Player::set_player_move() {
 	cout << "Enter a move (" << this->marker << ") " << this->name << ": ";
 	getline(cin, this->move);
-	
- 	return this->move;
+}
+
+string Player::get_player_move() {
+	return this->move;
 }
