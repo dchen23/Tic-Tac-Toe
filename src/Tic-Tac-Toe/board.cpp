@@ -43,8 +43,11 @@ void Board::print_board() {
 	cout << string(2, '\n');
 }
 
+// prompt user for input then write to board
 bool Board::submit_move(Player player) {
+	// prompt user for input
 	player.set_player_move();
+
 	// checks to see if input is size 3 and contains a space in the middle 1 1
 	if (player.get_player_move().size() != 3 || player.get_player_move()[1] != ' ' || !(isdigit(player.get_player_move()[0])) || !(isdigit(player.get_player_move()[2]))) {
 		cout << "Invalid Input " << player.get_name() << ": Please enter a column then a row (Example: 1 1)." << endl;
@@ -75,42 +78,52 @@ bool Board::submit_move(Player player) {
 	return true;
 }
 
-// check to see if player has 1 out of the 8 winning positions
+// check to see if player has a winning position
 bool Board::is_winner(Player player) {
-	
+	// check column
+	for (int i = 0; i < 3; ++i) {
+		if (this->board[0][i] != player.get_marker()) {
+			break;
+		}
+		if (i == 2) {
+			cout << "Well done " << player.get_name() << " you have won.";
+			return true;
+		}
+	}
 
-	if (this->board[0][0] == player.get_marker() && this->board[0][1] == player.get_marker() && this->board[0][2] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
+	// check row
+	for (int i = 0; i < 3; ++i) {
+		if (this->board[i][0] != player.get_marker()) {
+			break;
+		}
+		if (i == 2) {
+			cout << "Well done " << player.get_name() << " you have won.";
+			return true;
+		}
 	}
-	if (this->board[1][0] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[1][2] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
+
+	// check diagonal
+	for (int i = 0; i < 3; ++i) {
+		if (this->board[i][i] != player.get_marker()) {
+			break;
+		}
+		if (i == 2) {
+			cout << "Well done " << player.get_name() << " you have won.";
+			return true;
+		}
 	}
-	if (this->board[2][0] == player.get_marker() && this->board[2][1] == player.get_marker() && this->board[2][2] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
+
+	// check inverse diagonal
+	for (int i = 0, j = 2; i < 3; ++i, --j) {
+		if (this->board[j][i] != player.get_marker()) {
+			break;
+		}
+		if (i == 2) {
+			cout << "Well done " << player.get_name() << " you have won.";
+			return true;
+		}
 	}
-	if (this->board[0][0] == player.get_marker() && this->board[1][0] == player.get_marker() && this->board[2][0] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
-	}
-	if (this->board[0][1] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[2][1] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
-	}
-	if (this->board[0][2] == player.get_marker() && this->board[1][2] == player.get_marker() && this->board[2][2] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
-	}
-	if (this->board[0][0] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[2][2] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
-	}
-	if (this->board[2][0] == player.get_marker() && this->board[1][1] == player.get_marker() && this->board[0][2] == player.get_marker()) {
-		cout << "Well done " << player.get_name() << " you have won.";
-		return true;
-	}
+	
 	return false;
 }
 
