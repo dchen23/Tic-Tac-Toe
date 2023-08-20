@@ -15,6 +15,7 @@ private:
 	std::string name;
 	char marker;
 	std::string move;
+	static inline int count { 1 };
 };
 
 #endif

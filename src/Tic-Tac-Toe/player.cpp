@@ -9,9 +9,6 @@ using std::cin;
 using std::string;
 using std::getline;
 
-// globals
-static int count = 1;
-
 Player::Player(char marker) {
 	cout << "Enter player " << count << "'s name: ";
 	getline(cin, this->name);

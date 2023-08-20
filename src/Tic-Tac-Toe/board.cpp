@@ -87,7 +87,7 @@ bool Board::is_winner(Player player) {
 				break;
 			}
 			if (j == 2) {
-				cout << "Well done " << player.get_name() << " you have won.";
+				cout << "Well done " << player.get_name() << " you have won." << endl;
 				return true;
 			}
 		}
@@ -100,7 +100,7 @@ bool Board::is_winner(Player player) {
 				break;
 			}
 			if (j == 2) {
-				cout << "Well done " << player.get_name() << " you have won.";
+				cout << "Well done " << player.get_name() << " you have won." << endl;
 				return true;
 			}
 		}
@@ -112,7 +112,7 @@ bool Board::is_winner(Player player) {
 			break;
 		}
 		if (i == 2) {
-			cout << "Well done " << player.get_name() << " you have won.";
+			cout << "Well done " << player.get_name() << " you have won." << endl;
 			return true;
 		}
 	}
@@ -123,7 +123,7 @@ bool Board::is_winner(Player player) {
 			break;
 		}
 		if (i == 2) {
-			cout << "Well done " << player.get_name() << " you have won.";
+			cout << "Well done " << player.get_name() << " you have won." << endl;
 			return true;
 		}
 	}
@@ -134,7 +134,7 @@ bool Board::is_winner(Player player) {
 bool Board::is_tie() {
 	// if there are no empty tiles then it is a tie
 	if (this->empty_tiles == 0) {
-		cout << "The game has been tied!";
+		cout << "The game has been tied!" << endl;
 		return true;
 	}
 
