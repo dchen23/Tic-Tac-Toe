@@ -17,7 +17,7 @@ using std::isdigit;
 
 #define X 'X'
 #define O 'O'
-#define TO_INDEX - 1
+#define TO_INDEX 1
 
 Board::Board() :
 	board{ { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' }, { ' ' , ' ' , ' ' } } {
@@ -82,23 +82,27 @@ bool Board::submit_move(Player player) {
 bool Board::is_winner(Player player) {
 	// check column
 	for (int i = 0; i < 3; ++i) {
-		if (this->board[0][i] != player.get_marker()) {
-			break;
-		}
-		if (i == 2) {
-			cout << "Well done " << player.get_name() << " you have won.";
-			return true;
+		for (int j = 0; j < 3 ; ++j) {
+			if (this->board[i][j] != player.get_marker()) {
+				break;
+			}
+			if (j == 2) {
+				cout << "Well done " << player.get_name() << " you have won.";
+				return true;
+			}
 		}
 	}
 
 	// check row
 	for (int i = 0; i < 3; ++i) {
-		if (this->board[i][0] != player.get_marker()) {
-			break;
-		}
-		if (i == 2) {
-			cout << "Well done " << player.get_name() << " you have won.";
-			return true;
+		for (int j = 0; j < 3; ++j) {
+			if (this->board[j][i] != player.get_marker()) {
+				break;
+			}
+			if (j == 2) {
+				cout << "Well done " << player.get_name() << " you have won.";
+				return true;
+			}
 		}
 	}
 
