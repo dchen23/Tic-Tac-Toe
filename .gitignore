@@ -6,3 +6,6 @@ v16/
 *.vcxproj
 *.vcxproj.user
 *.vcxproj.filters
+.vscode/
+*build/
+.DS_Store
