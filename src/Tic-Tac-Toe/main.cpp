@@ -28,6 +28,7 @@ int main() {
 		if (board.is_winner(player2) || board.is_tie()) {
 			return 0;
 		}
+		board.hint(player1);
 		// check to see if player 1's move is legit then write it to the board
 		while (!(board.submit_move(player1))) {
 			continue;
@@ -39,6 +40,7 @@ int main() {
 		if (board.is_winner(player1) || board.is_tie()) {
 			return 0;
 		}
+		board.hint(player2);
 		// check to see if player 2's move is legit then write it to the board
 		while (!(board.submit_move(player2))) {
 			continue;

@@ -7,9 +7,10 @@ class Board {
 public:
 	Board();
 	void print_board();
-	bool submit_move(Player player);
-	bool is_winner(Player player);
+	bool submit_move(Player& player);
+	bool is_winner(Player& opponent);
 	bool is_tie();
+	void hint(Player& player);
 
 private:
 	char board[3][3];

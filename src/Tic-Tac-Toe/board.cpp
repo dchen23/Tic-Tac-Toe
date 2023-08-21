@@ -44,7 +44,7 @@ void Board::print_board() {
 }
 
 // prompt user for input then write to board
-bool Board::submit_move(Player player) {
+bool Board::submit_move(Player& player) {
 	// prompt user for input
 	player.set_player_move();
 
@@ -79,28 +79,29 @@ bool Board::submit_move(Player player) {
 }
 
 // check to see if player has a winning position
-bool Board::is_winner(Player player) {
-	// check column
+bool Board::is_winner(Player& opponent) {
+
+	// check row
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3 ; ++j) {
-			if (this->board[i][j] != player.get_marker()) {
+			if (this->board[i][j] != opponent.get_marker()) {
 				break;
 			}
 			if (j == 2) {
-				cout << "Well done " << player.get_name() << " you have won." << endl;
+				cout << "Well done " << opponent.get_name() << " you have won." << endl;
 				return true;
 			}
 		}
 	}
 
-	// check row
+	// check column
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			if (this->board[j][i] != player.get_marker()) {
+			if (this->board[j][i] != opponent.get_marker()) {
 				break;
 			}
 			if (j == 2) {
-				cout << "Well done " << player.get_name() << " you have won." << endl;
+				cout << "Well done " << opponent.get_name() << " you have won." << endl;
 				return true;
 			}
 		}
@@ -108,27 +109,105 @@ bool Board::is_winner(Player player) {
 
 	// check diagonal
 	for (int i = 0; i < 3; ++i) {
-		if (this->board[i][i] != player.get_marker()) {
+		if (this->board[i][i] != opponent.get_marker()) {
 			break;
 		}
 		if (i == 2) {
-			cout << "Well done " << player.get_name() << " you have won." << endl;
+			cout << "Well done " << opponent.get_name() << " you have won." << endl;
 			return true;
 		}
 	}
 
 	// check inverse diagonal
 	for (int i = 0, j = 2; i < 3; ++i, --j) {
-		if (this->board[j][i] != player.get_marker()) {
+		if (this->board[j][i] != opponent.get_marker()) {
 			break;
 		}
 		if (i == 2) {
-			cout << "Well done " << player.get_name() << " you have won." << endl;
+			cout << "Well done " << opponent.get_name() << " you have won." << endl;
 			return true;
 		}
 	}
 	
 	return false;
+}
+
+void Board::hint(Player& player) {
+	int player_tiles;
+	int emply_tiles;
+	std::pair<int, int> winning_position;
+
+	// check row
+	for (int i = 0; i < 3; ++i) {
+		player_tiles = 0;
+		emply_tiles = 0;
+		for (int j = 0; j < 3 ; ++j) {
+			if (this->board[i][j] == player.get_marker()) {
+				++player_tiles;
+			} else if (this->board[i][j] == ' ') {
+				winning_position = std::make_pair(j, i);
+				++emply_tiles;
+			}
+			if (player_tiles == 2 && emply_tiles == 1) {
+				cout << "Hint: placing " << player.get_marker() << " at position (" << winning_position.first + TO_INDEX << ", " <<
+					winning_position.second + TO_INDEX << ") will win the game!" << endl;
+				break;
+			}
+		}
+	}
+
+	// check column
+	for (int i = 0; i < 3; ++i) {
+		player_tiles = 0;
+		emply_tiles = 0;
+		for (int j = 0; j < 3 ; ++j) {
+			if (this->board[j][i] == player.get_marker()) {
+				++player_tiles;
+			} else if (this->board[j][i] == ' ') {
+				winning_position = std::make_pair(i, j);
+				++emply_tiles;
+			}
+			if (player_tiles == 2 && emply_tiles == 1) {
+				cout << "Hint: placing " << player.get_marker() << " at position (" << winning_position.first + TO_INDEX << ", " <<
+					winning_position.second + TO_INDEX << ") will win the game!" << endl;
+				break;
+			}
+		}
+	}
+
+	// check diagonal
+	player_tiles = 0;
+	emply_tiles = 0;
+	for (int i = 0; i < 3; ++i) {
+		if (this->board[i][i] == player.get_marker()) {
+			++player_tiles;
+		} else if (this->board[i][i] == ' ') {
+			winning_position = std::make_pair(i, i);
+			++emply_tiles;
+		}
+		if (player_tiles == 2 && emply_tiles == 1) {
+			cout << "Hint: placing " << player.get_marker() << " at position (" << winning_position.first + TO_INDEX << ", " <<
+				winning_position.second + TO_INDEX << ") will win the game!" << endl;
+			break;
+		}
+	}
+
+	// check inverse diagonal
+	player_tiles = 0;
+	emply_tiles = 0;
+	for (int i = 0, j = 2; i < 3; ++i, --j) {
+		if (this->board[j][i] == player.get_marker()) {
+			++player_tiles;
+		} else if (this->board[j][i] == ' ') {
+			winning_position = std::make_pair(i, j);
+			++emply_tiles;
+		}
+		if (player_tiles == 2 && emply_tiles == 1) {
+			cout << "Hint: placing " << player.get_marker() << " at position (" << winning_position.first + TO_INDEX << ", " <<
+				winning_position.second + TO_INDEX << ") will win the game!" << endl;
+			break;
+		}
+	}
 }
 
 bool Board::is_tie() {
