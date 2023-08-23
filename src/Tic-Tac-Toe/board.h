@@ -1,6 +1,7 @@
 #ifndef GUARD_BOARD_H
 #define GUARD_BOARD_H
 
+#include <vector>
 #include "player.h"
 
 class Board {
@@ -11,6 +12,10 @@ public:
 	bool is_winner(Player& opponent);
 	bool is_tie();
 	void hint(Player& player);
+
+	// For unit testing
+	void set_board(const std::vector<std::vector<char>>&);
+	bool is_legit();
 
 private:
 	char board[3][3];

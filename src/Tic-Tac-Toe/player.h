@@ -16,6 +16,9 @@ public:
 	void stop_timer();
 	void reset_timer();
 
+	// For unit testing
+	Player(char, const std::string&&);
+
 private:
 	std::string name;
 	char marker;

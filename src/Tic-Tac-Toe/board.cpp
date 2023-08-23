@@ -14,6 +14,7 @@ using std::setw;
 using std::string;
 using std::stoi;
 using std::isdigit;
+using std::vector;
 
 #define X 'X'
 #define O 'O'
@@ -218,4 +219,31 @@ bool Board::is_tie() {
 	}
 
 	return false;
+}
+
+// For unit testing
+void Board::set_board(const vector<vector<char>>& board) {
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3 ; ++j) {
+			this->board[i][j] = board[i][j];
+		}
+	}
+}
+
+bool Board::is_legit() {
+	int x_count = 0;
+	int o_count = 0;
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3 ; ++j) {
+			if (this->board[i][j] == X) {
+				++x_count;
+			} else if (this->board[i][j] == O) {
+				++o_count;
+			}
+		}
+	}
+	if (x_count - o_count > 1 || o_count - x_count > 1) {
+		return false;
+	}
+	return true;
 }

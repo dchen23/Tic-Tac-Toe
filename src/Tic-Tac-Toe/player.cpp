@@ -89,3 +89,8 @@ void Player::reset_timer() {
 string Player::get_player_move() {
 	return this->move;
 }
+
+// For unit testing
+Player::Player(char marker, const string&& name) : name { name }, marker { marker }, timeout { false } {
+	++count;
+}
