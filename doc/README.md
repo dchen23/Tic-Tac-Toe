@@ -64,14 +64,44 @@ Utilized a test framwork called [doctest](https://github.com/doctest/doctest), w
 **Implementation:** This is a living test case. tester need to mock a full gameplay, the system will dynamic checking, later given a test report or interrupted if an assert found. Details in [c23d33f](https://github.com/dchen23/Tic-Tac-Toe/commit/c23d33f258c25c5b4be54b5708608a2233e84b85).
 
 ### Other Test Cases (in future)
- - Check if a token can be placed on each tiles.
- - Print the board and compare with its internal layout.
- - Make sure submit_move() works well, can filer out illegal move and keep right move.
- - Test on the timer fucntion. (this will be a hard test case)
+ - Check if a token can be placed on each tiles
+ - Print the board and compare with its internal layout
+ - Make sure submit_move() works well, can filer out illegal move and keep right move
+ - Test on the timer fucntion. (this will be a hard test case).
 
 ## Screenshots
+- Player information set up:
+  
+  ![input](image/corrent_input.png)
+  
+- Input with wrong format for timer will print notice:
+
+  ![wrong_input](image/wrong_timer_input.png)
+
+- If the player don't make a move before the timer is up, the opponent will win instantly:
+
+  ![timeout](image/timeout.png)
+   
+- Print hint when the player is approaching winning for a single move:
+
+  ![hint](image/hint.png)
+  
+- Print multiple hints if the player has different ways to win. In this case, Player 1 follow the second hint and win the game:
+
+  ![multi_hint](image/multi_hint_and_win.png)
+
+- Run two test cases:
+
+  ![unit_test](image/unit_test.png)
 
 ## TODO
 ### Functional
+- [ ] In some particular situations, a tie can be declared before the board is fully placed with tokens. For example, if the board is in a state where no player can win.
+- [ ] Allow two players to play multiple games in one session and add a scoreboard to rank their scores, such as "tie -> 1 pt", "win -> 3 pts", "lose -> 0 pt"
+- [ ] Build AI Bots for single playing
+- [ ] Display the remaining time in a countdown format when the timer is close to expiring
+- [ ] Enhance the online game matching feature.
 
 ### Non-functional
+- [ ] Refactoring the codebase to reduce duplicated code and make it more modular
+- [ ] Optimize the winning judgement and hint functions, which can be pre-computed at `submit_move()` stage.
